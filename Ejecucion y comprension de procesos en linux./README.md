@@ -25,9 +25,58 @@ El objetivo es afianzar la comprensión de los **procesos en sistemas operativos
 ---
 
 1. Define qué es un **proceso** y en qué se diferencia de un **programa**.  
-2. Explica qué es el **kernel** y su papel en la gestión de procesos.  
+
+```
+- Programa: es una entidad pasiva: un archivo que contiene un grupo de instrucciones para que éste se ejecute.
+
+- Proceso: Es la ejecución de un programa y se considera una entidad activa porque realiza las acciones espeficadas en ese programa. 
+
+La diferencia es que un programa es un código guardado en un disco duro para una fase previa del proceso. El proceso es un evento de ese programa en ejecución.
+
+Link: https://www.profesionalreview.com/2020/06/20/cual-es-la-diferencia-entre-un-programa-y-un-proceso/
+```
+2. Explica qué es el **kernel** y su papel en la gestión de procesos. 
+
+```
+Es un software de nivel inferior que se encarga de gestionar los recursos del sistema y permitir la comunicación entre el hardware y el software.
+En la gestión de procesos, el kernel crea, planifica y termina procesos, asigna los recursos necesarios (como memoria y tiempo de CPU) a cada uno, y asegura que no interfieran entre sí, garantizando un funcionamiento estable y seguro del sistema. 
+
+Link: https://www.eaeprogramas.es/blog/negocio/tecnologia/que-es-el-kernel-cual-es-su-trabajo-y-como-funciona#:~:text=El%20Kernel%2C%20tambi%C3%A9n%20conocido%20como%20n%C3%BAcleo%2C%20es,aplicaciones%20y%20el%20procesamiento%20de%20datos%20f%C3%ADsicos.
+```
+
 3. ¿Qué son **PID** y **PPID**? Explica con un ejemplo.  
+
+```text
+-PID:Es el número único que se le asigna a un proceso cuando se inicia.
+-PPID:Es otro Id que se le asigna al proceso para indicar cual es el proceso inicial que inició a este.
+
+Ejemplo:
+1. Inicio de sesión:
+Cuando inicias sesión en un sistema operativo como Linux, se lanza un proceso de shell (por ejemplo, Bash). Este proceso obtiene su propio PID. 
+
+2.Creación de un nuevo proceso:
+Desde el shell, ejecutas un comando, como ls. Este comando también es un proceso, y se le asigna un nuevo PID. 
+
+3. Identificación de la relación:
+
+- PID del proceso hijo (ls): Digamos que el proceso ls tiene un PID de 1234. 
+- PPID del proceso hijo (ls): El PPID del proceso ls será el PID del proceso de shell que lo inició, por ejemplo, el PID del shell podría ser 5678. Por lo tanto, el PPID de ls sería 5678. 
+- PID del proceso padre (shell): El PID del proceso de shell es 5678. 
+
+4. Uso práctico:
+Si quisieras detener el proceso ls, usarías el comando kill con su PID: kill 1234. El PPID te muestra quién inició el proceso, lo que es útil para entender la estructura de los procesos en ejecución y cómo interactúan. 
+
+
+Link:https://www.tumblr.com/sololinuxes/656041622503604224/que-es-ppid-y-como-identificarlo?redirect_to=%2Fsololinuxes%2F656041622503604224%2Fque-es-ppid-y-como-identificarlo&source=blog_view_login_wall
+```
 4. Describe qué es un **cambio de contexto** y por qué es costoso.  
+```text
+El cambio de contexto es el proceso de cambiar la CPU de un proceso, tarea o hilo a otro.
+
+El cambio de contexto es costoso porque todo el proceso requiere un uso intensivo de recursos computacionales, y cuantos más cambios de contexto se produzcan, más lento se volverá el sistema. Esto se debe a que cada cambio de contexto implica guardar el estado actual de la CPU, cargar el estado del nuevo proceso o hilo y, a continuación, reanudar su ejecución. Esto requiere tiempo y consume recursos de la CPU, lo que puede ralentizar el sistema.
+
+Link:https://www-netdata-cloud.translate.goog/blog/understanding-context-switching-and-its-impact-on-system-performance/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=sge#:~:text=Context%20switching%20is%20the%20process,keep%20the%20system%20running%20smoothly.
+```
 5. Explica qué es un **PCB (Process Control Block)** y qué información almacena.  
 6. Diferencia entre **proceso padre** y **proceso hijo**.  
 7. Explica qué ocurre cuando un proceso queda **huérfano** en Linux.  
