@@ -1,10 +1,14 @@
 package org.formacion.procesos;
 
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
+/**
+ * @author nexphernandez
+ * @version 1.0.0
+ */
 @SpringBootApplication
 public class ProcesosServiciosApplication {
 
@@ -16,10 +20,10 @@ public class ProcesosServiciosApplication {
     CommandLineRunner demo(Procesos procesos) {
         return args -> {
             System.out.println("Iniciando proceso al arrancar la aplicación...");
-
-            procesos.ejecutar();
-
+            procesos.crearFichero();
+            procesos.contarLineas();
             System.out.println("Proceso finalizado.");
         };
     }
+
 }
