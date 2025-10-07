@@ -16,13 +16,13 @@ public class Procesos {
      * crea un fichero donde se guarda el registro de los procesos de java
      */
     public void crearFichero(){
-            String[] cmd1 = {"/bin/sh", "-c", "ps aux | grep java > mis_procesos.txt"};
-            try {
-                Process process1 = Runtime.getRuntime().exec(cmd1);
-                process1.waitFor();
-            } catch (InterruptedException | IOException e) {
-                e.printStackTrace();
-            }
+        String[] cmd1 = {"/bin/sh", "-c", "ps aux | grep java > mis_procesos.txt"};
+        try {
+            Process process1 = Runtime.getRuntime().exec(cmd1);
+            process1.waitFor();
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
