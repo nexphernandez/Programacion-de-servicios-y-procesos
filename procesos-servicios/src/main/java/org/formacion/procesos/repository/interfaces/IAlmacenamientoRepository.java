@@ -1,6 +1,6 @@
 package org.formacion.procesos.repository.interfaces;
 
-public interface IFicheroRepository {
+public interface IAlmacenamientoRepository {
 
     public String saludar();
 }
