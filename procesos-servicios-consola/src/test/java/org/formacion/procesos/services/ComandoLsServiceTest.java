@@ -36,8 +36,22 @@ class ComandoLsServiceTest {
     }
 
     @Test
+    void validarSinVacioTest(){
+        String [] arrayComando = {"ls",""};
+        boolean valida =comandoLsService.validar(arrayComando);
+        Assertions.assertTrue(valida,"Se ha producido un error en la validación");
+    }
+
+    @Test
     void validarFalseTest(){
         String [] arrayComando = {"ls","lalalala"};
+        boolean valida =comandoLsService.validar(arrayComando);
+        Assertions.assertFalse(valida,"Se ha producido un error en la validación");
+    }
+
+    @Test
+    void validarFalse2Test(){
+        String [] arrayComando = {"ls","-lalalala"};
         boolean valida =comandoLsService.validar(arrayComando);
         Assertions.assertFalse(valida,"Se ha producido un error en la validación");
     }

@@ -1,15 +1,16 @@
 package org.formacion.procesos.services.abstractas;
 
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.formacion.procesos.domain.ProcessType;
 import org.formacion.procesos.repositories.interfaces.CrudInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class ComandoServiceAbstract {
-    String comando;
-    List<String> parametros;
-    ProcessType tipo;
+    private String comando;
+    private ProcessType tipo;
+    private String expresionRegular;
 
     @Autowired
     CrudInterface fileRepository;
@@ -18,40 +19,30 @@ public abstract class ComandoServiceAbstract {
         this.comando = comando;
     }
 
-    public void setParametros(List<String> parametros) {
-        this.parametros = parametros;
-    }
-
     public String getComando() {
         return comando;
     }
 
-    public List<String> getParametros() {
-        return parametros;
-    }
-
-    public void procesarLinea(String linea){
-        String[] arrayComando = linea.split(" ");
+    public void procesarLinea(String linea) {
+        String[] arrayComando = linea.split("\s*");
         this.setComando(arrayComando[0]);
         if (!validar(arrayComando)) {
             System.out.println("El comando es invalido");
             return;
         }
 
-
         Process proceso;
-        //linea = ps aux | grep java
+
         try {
             proceso = new ProcessBuilder("sh", "-c", linea + " > mis_procesos.txt")
-                        .start();
+                    .start();
             ejecutarProceso(proceso);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        imprimeMensaje();
     }
 
-    public boolean ejecutarProceso(Process proceso){
+    public boolean ejecutarProceso(Process proceso) {
         try {
 
             proceso.waitFor();
@@ -76,8 +67,29 @@ public abstract class ComandoServiceAbstract {
         this.tipo = tipo;
     }
 
-    public abstract void imprimeMensaje();
-    public abstract boolean validar(String[] arrayComando);
+    public String getExpresionRegular() {
+        return expresionRegular;
+    }
+
+    public void setExpresionRegular(String expresionRegular) {
+        this.expresionRegular = expresionRegular;
+    }
+
+    public boolean validar(String[] arrayComando) {
+        if (!validarComando()) {
+            return false;
+        }
+        String parametro = arrayComando[1];
+
+        Pattern pattern = Pattern.compile(expresionRegular);
+        Matcher matcher = pattern.matcher(parametro);
+        if (!matcher.find()) {
+            System.out.println("No cumple");
+            return false;
+        }
+
+        return true;
+    }
 
     public boolean validarComando() {
         if (!this.getComando().toUpperCase().equals(getTipoToString())) {
