@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class FileRepository implements CrudInterface{
     
-    String fileNameM;
+    String fileName;
 
     @Override
     public boolean add(String text) {

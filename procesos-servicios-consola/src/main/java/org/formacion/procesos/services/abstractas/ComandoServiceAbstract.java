@@ -1,4 +1,4 @@
-package org.formacion.procesos.Services.abstractas;
+package org.formacion.procesos.services.abstractas;
 
 import java.util.List;
 

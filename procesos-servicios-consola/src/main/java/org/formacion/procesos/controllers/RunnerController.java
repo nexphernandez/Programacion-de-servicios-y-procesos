@@ -2,8 +2,8 @@ package org.formacion.procesos.controllers;
 
 import java.util.Scanner;
 
-import org.formacion.procesos.Services.ComandoLsService;
-import org.formacion.procesos.Services.ComandoPsService;
+import org.formacion.procesos.services.ComandoLsService;
+import org.formacion.procesos.services.ComandoPsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
