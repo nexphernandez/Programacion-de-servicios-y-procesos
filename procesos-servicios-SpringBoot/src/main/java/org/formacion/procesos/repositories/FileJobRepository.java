@@ -14,7 +14,7 @@ import java.nio.file.StandardOpenOption;
 @Repository
 public class FileJobRepository implements IJobRepository {
     private static Logger looger = LoggerFactory.getLogger(FileJobRepository.class);
-    static String fileName;
+    private String fileName;
     static Path path;
 
     public void setFileName(String fileName){
@@ -27,6 +27,10 @@ public class FileJobRepository implements IJobRepository {
         }
         URL resources = getClass().getClassLoader().getResource(fileName);
         path = Paths.get(resources.getPath());
+    }
+
+    public Path obtenerPath() {
+        return path;
     }
 
     @Override

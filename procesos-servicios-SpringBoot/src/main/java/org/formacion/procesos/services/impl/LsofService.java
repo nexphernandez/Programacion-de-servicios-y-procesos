@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class LsofService extends ComandoServiceAbstract {
 
     public LsofService() {
-        this.setTipo(Job.lsof);
+        this.setTipo(Job.LSOF);
         this.setExpresionRegular("^((-(la|l|a))|\s*)$");
     }
 

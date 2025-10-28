@@ -5,9 +5,10 @@ import java.util.regex.Pattern;
 
 import org.formacion.procesos.domain.Job;
 import org.formacion.procesos.repositories.interfaces.IJobRepository;
+import org.formacion.procesos.services.interfaces.CommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class ComandoServiceAbstract {
+public abstract class ComandoServiceAbstract implements CommandService{
     private String comando;
     private Job tipo;
     private String expresionRegular;
@@ -33,7 +34,7 @@ public abstract class ComandoServiceAbstract {
         Process proceso;
 
         try {
-            proceso = new ProcessBuilder("sh", "-c", linea + " > mis_procesos.txt")
+            proceso = new ProcessBuilder("sh", "-c", linea + " > "+ iJobRepoitory.obtenerPath())
                     .start();
             ejecutarProceso(proceso);
         } catch (Exception e) {
@@ -90,7 +91,7 @@ public abstract class ComandoServiceAbstract {
     }
 
     public boolean validarComando() {
-        if (!this.getComando().equals(getTipoToString())) {
+        if (!this.getComando().toUpperCase().equals(getTipoToString())) {
             System.out.println("El comando es invalido");
             return false;
         }

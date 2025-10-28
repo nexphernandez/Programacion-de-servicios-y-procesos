@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import org.formacion.procesos.services.impl.LsofService;
 import org.formacion.procesos.services.impl.PsHeadService;
+import org.formacion.procesos.services.impl.TopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,13 @@ import org.springframework.stereotype.Service;
 public class CliController {
 
     @Autowired
-    PsHeadService comandoControllerTop;
+    PsHeadService comandoControllerPs;
 
     @Autowired
     LsofService comandoControllerLsof;
+
+    @Autowired
+    TopService comandoControllerTop;
 
     public void menuConsola() {
         Scanner scanner = new Scanner(System.in);
@@ -27,10 +31,16 @@ public class CliController {
         String linea = scanner.nextLine();
 
         if (linea.toUpperCase().startsWith("PS")) {
-            comandoControllerTop.procesarLinea(linea);
+            comandoControllerPs.procesarLinea(linea);
 
-        } else {
+        }
+        if (linea.toUpperCase().startsWith("LSOF")) {
+
             comandoControllerLsof.procesarLinea(linea);
+        }
+        if (linea.toUpperCase().startsWith("TOP")) {
+
+            comandoControllerTop.procesarLinea(linea);
         }
 
     }
