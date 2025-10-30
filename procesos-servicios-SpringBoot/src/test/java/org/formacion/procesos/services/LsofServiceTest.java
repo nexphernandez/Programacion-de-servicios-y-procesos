@@ -16,8 +16,8 @@ class LsofServiceTest {
     }
 
     @Test
-    void validarLaTest(){
-        String [] arrayComando = {"lsof","-la"};
+    void validarITest(){
+        String [] arrayComando = {"lsof","-i"};
         boolean valida =comandoLsofService.validar(arrayComando);
         Assertions.assertTrue(valida,"Se ha producido un error en la validación");
     }

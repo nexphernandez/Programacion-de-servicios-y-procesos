@@ -10,7 +10,7 @@ public class LsofService extends ComandoServiceAbstract {
 
     public LsofService() {
         this.setTipo(Job.LSOF);
-        this.setExpresionRegular("^((-(la|l|a))|\s*)$");
+        this.setExpresionRegular("^(-i|\s*)$");
     }
 
 }
