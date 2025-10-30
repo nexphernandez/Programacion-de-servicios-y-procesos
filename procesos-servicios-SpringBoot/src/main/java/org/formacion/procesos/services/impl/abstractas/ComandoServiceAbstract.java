@@ -25,6 +25,10 @@ public abstract class ComandoServiceAbstract implements CommandService{
 
     public void procesarLinea(String linea) {
         String[] arrayComando = linea.split("\s+");
+        if (arrayComando[0].toUpperCase().equals("TOP") && arrayComando.length -1 ==0) {
+            linea = "top -b -n1";
+            arrayComando = linea.split("\s+");
+        }
         this.setComando(arrayComando[0]);
         if (!validar(arrayComando)) {
             System.out.println("El comando es invalido");
@@ -78,6 +82,7 @@ public abstract class ComandoServiceAbstract implements CommandService{
         if (!validarComando()) {
             return false;
         }
+        
         if (arrayComando.length -1 == 0) {
             return true;
         }
