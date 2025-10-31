@@ -5,8 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.formacion.procesos.repositories.interfaces.IJobRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class FileJobRepository implements IJobRepository {
-    private static Logger looger = LoggerFactory.getLogger(FileJobRepository.class);
     private String fileName;
     static Path path;
 
@@ -27,21 +24,12 @@ public class FileJobRepository implements IJobRepository {
     /**
      * Constuctor que inicializa el path para guardar el resultado del comando
      */
-    public FileJobRepository() {
+    public FileJobRepository(){
         if (fileName == null) {
             fileName = "mis_procesos.txt";
         }
-    
-        try {
-            URL resources = getClass().getClassLoader().getResource(fileName);
-            if (resources == null) {
-                throw new RuntimeException("No se encontró el recurso: " + fileName);
-            }
-    
-            path = Paths.get(resources.toURI());
-        } catch (Exception e) {
-            throw new RuntimeException("Error obteniendo el path del fichero", e);
-        }
+        URL resource = getClass().getClassLoader().getResource(fileName);
+        path = Paths.get(resource.getPath());
     }
     
     @Override

@@ -9,6 +9,10 @@ import org.formacion.procesos.repositories.interfaces.IJobRepository;
 import org.formacion.procesos.services.interfaces.CommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ *  @author: nexphernandez
+ *  @version: 1.0.0
+ */
 public abstract class ComandoServiceAbstract implements CommandService{
     private String comando;
     private Job tipo;
@@ -24,6 +28,7 @@ public abstract class ComandoServiceAbstract implements CommandService{
         return comando;
     }
 
+    @Override
     public boolean  procesarLinea(String linea) {
         String[] arrayComando = linea.split("\s+");
         this.setComando(arrayComando[0]);
@@ -44,6 +49,7 @@ public abstract class ComandoServiceAbstract implements CommandService{
         return true;
     }
 
+    @Override
     public boolean ejecutarProceso(Process proceso) {
         try {
             proceso.waitFor();
@@ -76,6 +82,7 @@ public abstract class ComandoServiceAbstract implements CommandService{
         this.expresionRegular = expresionRegular;
     }
 
+    @Override
     public boolean validar(String[] arrayComando) {
         if (!validarComando()) {
             return false;
@@ -98,6 +105,10 @@ public abstract class ComandoServiceAbstract implements CommandService{
         return true;
     }
 
+    /**
+     * comprueba que el comando sea valido
+     * @return true/false
+     */
     public boolean validarComando() {
         if (!this.getComando().toUpperCase().equals(getTipoToString())) {
             System.out.println("El comando es invalido");
