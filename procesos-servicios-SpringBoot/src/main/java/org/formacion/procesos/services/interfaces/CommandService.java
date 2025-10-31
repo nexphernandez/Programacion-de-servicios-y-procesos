@@ -1,7 +1,7 @@
 package org.formacion.procesos.services.interfaces;
 
 public interface CommandService {
-    void procesarLinea(String linea);
+    boolean procesarLinea(String linea);
 
     boolean ejecutarProceso(Process proceso);
 

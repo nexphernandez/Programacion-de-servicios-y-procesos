@@ -16,45 +16,60 @@ class PsHeadServiceTest {
     }
 
     @Test
-    void validarXaTest(){
-        String [] arrayComando = {"ps","xa"};
+    void validarAuxTest(){
+        String [] arrayComando = {"ps","-aux | head"};
         boolean valida =comandoPsHeadService.validar(arrayComando);
         Assertions.assertTrue(valida,"Se ha producido un error en la validación");
     }
 
+    
     @Test
-    void validarXaMenosTest(){
-        String [] arrayComando = {"ps","-xa"};
-        boolean valida =comandoPsHeadService.validar(arrayComando);
-        Assertions.assertTrue(valida,"Se ha producido un error en la validación");
+    void validarconMenosTest(){
+        String[] arrayCommand = {"ps","-aux | head"};
+        boolean validar = comandoPsHeadService.validar(arrayCommand);
+        Assertions.assertTrue(validar, "error de validacion");
     }
 
     @Test
-    void validarVacioTest(){
-        String [] arrayComando = {"ps"," "};
-        boolean valida =comandoPsHeadService.validar(arrayComando);
-        Assertions.assertTrue(valida,"Se ha producido un error en la validación");
+    void validarTestVacio(){
+        String[] arrayComando = {"ps"};
+        boolean valida = comandoPsHeadService.validar(arrayComando);
+        Assertions.assertTrue(valida,"se ha producido un error en la validacion");
     }
 
     @Test
-    void validarSinVacioTest(){
-        String [] arrayComando = {"ps",""};
-        boolean valida =comandoPsHeadService.validar(arrayComando);
-        Assertions.assertTrue(valida,"Se ha producido un error en la validación");
+    void validarTestFalse(){
+        String[] arrayComando = {"ps","au |"};
+        boolean valida = comandoPsHeadService.validar(arrayComando);
+        Assertions.assertFalse(valida,"se ha producido un error en la validacion");
     }
 
     @Test
-    void validarFalseTest(){
-        String [] arrayComando = {"ps","lalalala"};
+    void validarTestFalse2(){
+        String[] arrayComando = {"ps","-"};
         boolean valida =comandoPsHeadService.validar(arrayComando);
-        Assertions.assertFalse(valida,"Se ha producido un error en la validación");
+        Assertions.assertFalse(valida,"se ha producido un error en la validacion");
     }
 
     @Test
-    void validarFalse2Test(){
-        String [] arrayComando = {"ps","-lalalala"};
-        boolean valida =comandoPsHeadService.validar(arrayComando);
-        Assertions.assertFalse(valida,"Se ha producido un error en la validación");
+    void procesarLineaTest(){
+        String linea = "ps aux | head";
+        boolean procesado = comandoPsHeadService.procesarLinea(linea);
+        Assertions.assertTrue(procesado, "error al procesar linea");
+    }
+
+    @Test
+    void procesarLineaMalTest(){
+        String linea = "paso au / head";
+        boolean procesado = comandoPsHeadService.procesarLinea(linea);
+        Assertions.assertFalse(procesado, "error al procesar linea");
+    }
+    
+    @Test
+    void procesarLineaSoloTest(){
+        String linea = "ps ";
+        boolean procesado = comandoPsHeadService.procesarLinea(linea);
+        Assertions.assertTrue(procesado, "error al procesar linea");
     }
 
 }

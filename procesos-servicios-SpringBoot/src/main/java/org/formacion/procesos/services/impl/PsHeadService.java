@@ -10,7 +10,7 @@ public class PsHeadService extends ComandoServiceAbstract {
 
     public PsHeadService(){
         this.setTipo(Job.PS);
-        this.setExpresionRegular("^((-?(xa|a|x|aux))|\s*)$");
+        this.setExpresionRegular("^((-?(aux\\s+\\|\\s+head)\s*)|\\s*)$");
     }
         
 }

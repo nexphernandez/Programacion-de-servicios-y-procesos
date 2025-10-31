@@ -12,6 +12,6 @@ public class TopService extends ComandoServiceAbstract{
      */
     public TopService(){
         this.setTipo(Job.TOP);
-        this.setExpresionRegular("");
+        this.setExpresionRegular("^((-(bn1))|\s*)$");
     }
 }

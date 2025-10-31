@@ -7,7 +7,10 @@ import org.formacion.procesos.services.impl.PsHeadService;
 import org.formacion.procesos.services.impl.TopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+/**
+ *  @author: nexphernandez
+ *  @version: 1.0.0
+ */
 @Service
 public class CliController {
 
@@ -20,14 +23,16 @@ public class CliController {
     @Autowired
     TopService comandoControllerTop;
 
+    /**
+     * funcion que imprime el menu en pantalla
+     */
     public void menuConsola() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=== Lanzador de Procesos (CLI) Linux/Windows ===\n" +
                 "Comandos:\n" +
-                "  run PING host=8.8.8.8 count=4 timeoutMs=15000\n" +
-                "  run LIST_DIR path=.\n" +
-                "  run HASH_SHA256 file=README.md\n" +
-                "  help | os | exit\n");
+                "  lsof -i\n" +
+                "  top -bn1\n" +
+                "  ps aux | head\n");
         String linea = scanner.nextLine();
 
         if (linea.toUpperCase().startsWith("PS")) {
@@ -42,15 +47,7 @@ public class CliController {
 
             comandoControllerTop.procesarLinea(linea);
         }
-
-    }
-
-    private void helpConsola() {
-        System.out.println(
-                "Ejemplos\n" +
-                        "run PING host=8.8.8.8 count=4\n" +
-                        "run LIST_DIR path=.\n" +
-                        "run HASH_SHA256 file=README.md timeoutMs=5000\n");
+        scanner.close();
     }
 
 }

@@ -38,7 +38,7 @@ class LsofServiceTest {
 
     @Test
     void validarSinVacioTest(){
-        String [] arrayComando = {"lsof",""};
+        String [] arrayComando = {"lsof"};
         boolean valida =comandoLsofService.validar(arrayComando);
         Assertions.assertTrue(valida,"Se ha producido un error en la validación");
     }
@@ -57,4 +57,24 @@ class LsofServiceTest {
         Assertions.assertFalse(valida,"Se ha producido un error en la validación");
     }
 
+    @Test
+    void procesarLineaTest(){
+        String linea = "lsof -i";
+        boolean procesado = comandoLsofService.procesarLinea(linea);
+        Assertions.assertTrue(procesado, "error al procesar linea");
+    }
+
+    @Test
+    void procesarLineaMalTest(){
+        String linea = "lsoaf -i";
+        boolean procesado = comandoLsofService.procesarLinea(linea);
+        Assertions.assertFalse(procesado, "error al procesar linea");
+    }
+
+        @Test
+    void procesarLineaSoloTest(){
+        String linea = "lsof ";
+        boolean procesado = comandoLsofService.procesarLinea(linea);
+        Assertions.assertTrue(procesado, "error al procesar linea");
+    }
 }

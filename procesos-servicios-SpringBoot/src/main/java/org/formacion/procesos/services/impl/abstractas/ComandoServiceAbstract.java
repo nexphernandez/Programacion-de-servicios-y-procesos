@@ -1,5 +1,6 @@
 package org.formacion.procesos.services.impl.abstractas;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,16 +24,12 @@ public abstract class ComandoServiceAbstract implements CommandService{
         return comando;
     }
 
-    public void procesarLinea(String linea) {
+    public boolean  procesarLinea(String linea) {
         String[] arrayComando = linea.split("\s+");
-        if (arrayComando[0].toUpperCase().equals("TOP") && arrayComando.length -1 ==0) {
-            linea = "top -b -n1";
-            arrayComando = linea.split("\s+");
-        }
         this.setComando(arrayComando[0]);
         if (!validar(arrayComando)) {
             System.out.println("El comando es invalido");
-            return;
+            return false;
         }
 
         Process proceso;
@@ -44,6 +41,7 @@ public abstract class ComandoServiceAbstract implements CommandService{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return true;
     }
 
     public boolean ejecutarProceso(Process proceso) {
@@ -86,7 +84,8 @@ public abstract class ComandoServiceAbstract implements CommandService{
         if (arrayComando.length -1 == 0) {
             return true;
         }
-        String parametro = arrayComando[1];
+        
+        String parametro = String.join(" ", Arrays.copyOfRange(arrayComando,1,arrayComando.length));
         
 
         Pattern pattern = Pattern.compile(expresionRegular);
