@@ -1,22 +1,26 @@
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
-public class FuerzaThorHulkTest {
+class FuerzaThorHulkTest {
 
     @Test
-    public void FuerzaThorHulk_terminaPorTiempo_yDeclaraResultado() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
+    void FuerzaThorHulk_terminaPorTiempo_yDeclaraResultado() {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
 
         FuerzaThorHulk f = new FuerzaThorHulk();
         f.main();
 
-        String salida = out.toString();
+        String salida = output.toString();
+        assertTrue(salida.contains("¡Tiempo!"),"La salida debe indicar que el tiempo terminó.");
 
-        assertTrue(salida.contains("¡Tiempo!"));
-        assertTrue(salida.contains("gana") || salida.contains("Empate"));
+        boolean resultadoValido = salida.contains("gana") || salida.contains("Empate");
+        assertTrue(resultadoValido,"La salida debe contener 'gana' o 'Empate'.");
+        assertTrue(f.isTiempoTerminado(), "El flag de tiempo debe ser verdadero.");
+        assertTrue(f.getTotalThor() >= 0 && f.getTotalHulk() >= 0,"Los totales deben ser no negativos.");
     }
 }

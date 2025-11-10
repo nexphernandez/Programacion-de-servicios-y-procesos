@@ -1,3 +1,4 @@
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -8,16 +9,17 @@ import org.junit.jupiter.api.Test;
 public class ExploradoresJediTest {
 
     @Test
-    public void ExploradoresJediUnSoloGanador() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
+    void ExploradoresJediUnSoloGanador() {
+        ByteArrayOutputStream salidaCapturada = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(salidaCapturada));
 
         ExploradoresJedi e = new ExploradoresJedi();
         e.main();
 
-        String salida = out.toString();
+        String salida = salidaCapturada.toString();
 
-        assertTrue(e.pistaEncontrada.get());
-        assertEquals(1, salida.split("halló una pista").length - 1);
+        assertTrue(e.isPistaEncontrada(), "Debe haberse encontrado una pista");
+        long ocurrencias = salida.split("halló una pista", -1).length - 1;
+        assertEquals(1, ocurrencias, "Debe haber exactamente un hallazgo en la salida");
     }
 }

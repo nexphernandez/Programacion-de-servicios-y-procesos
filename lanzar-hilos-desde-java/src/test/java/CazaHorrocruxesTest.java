@@ -8,22 +8,24 @@ import org.junit.jupiter.api.Test;
 public class CazaHorrocruxesTest {
 
     @Test
-    public void CazaHorrocruxesUnGanadorYUnSoloHallazgo() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
+    void CazaHorrocruxesUnGanadorYUnSoloHallazgo() {
+        ByteArrayOutputStream salidaCapturada = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(salidaCapturada));
 
-        CazaHorrocruxe c = new CazaHorrocruxe();
-        c.main();
+        CazaHorrocruxes sim = new CazaHorrocruxes();
+        sim.main();
 
-        String salida = out.toString();
+        String salida = salidaCapturada.toString();
 
-        assertTrue(c.encontrado.get());
+        assertTrue(sim.isEncontrado(), "Debe haberse encontrado un Horrocrux");
         assertTrue(
-            c.ganador.get().equals("Harry") ||
-            c.ganador.get().equals("Hermione") ||
-            c.ganador.get().equals("Ron")
+            sim.getGanador().equals("Harry") ||
+            sim.getGanador().equals("Hermione") ||
+            sim.getGanador().equals("Ron"),
+            "El ganador debe ser Harry, Hermione o Ron"
         );
 
-        assertEquals(1, salida.split("encontró un Horrocrux").length - 1);
+        long ocurrencias = salida.split("encontró un Horrocrux", -1).length - 1;
+        assertEquals(1, ocurrencias, "Debe haber exactamente un hallazgo en la salida");
     }
 }

@@ -4,20 +4,21 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
-public class BatallaMagosTest {
+
+class BatallaMagosTest {
 
     @Test
-    public void BatallaMagos_debeHaberGanadorYTerminar() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
+    void BatallaMagos_debeHaberGanadorYTerminar() {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
 
         BatallaMagos b = new BatallaMagos();
         b.main();
 
-        String salida = out.toString();
+        String salida = output.toString();
 
-        assertTrue(salida.contains("gana la batalla mágica."));
-        assertTrue(b.combateTerminado.get());
-        assertTrue(b.energiaGandalf <= 0 || b.energiaSaruman <= 0);
+        assertTrue(salida.contains("gana la batalla mágica."),"Debe anunciar un ganador.");
+        assertTrue(b.isCombateTerminado(),"El combate debe marcarse como terminado.");
+        assertTrue(b.getEnergiaGandalf() <= 0 || b.getEnergiaSaruman() <= 0, "Uno de los magos debe tener energía <= 0.");
     }
 }

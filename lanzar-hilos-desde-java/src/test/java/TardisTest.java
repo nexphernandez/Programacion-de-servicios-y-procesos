@@ -1,3 +1,4 @@
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -9,17 +10,19 @@ import org.junit.jupiter.api.Test;
 public class TardisTest {
 
     @Test
-    public void TardisExisteUnaEraGanadora() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
+    void TardisExisteUnaEraGanadora() {
+        ByteArrayOutputStream salidaCapturada = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(salidaCapturada));
 
         Tardis t = new Tardis();
         t.main();
 
-        String salida = out.toString();
+        String salida = salidaCapturada.toString();
 
-        assertTrue(t.destinoAlcanzado.get());
-        assertNotNull(t.eraGanadora.get());
-        assertEquals(1, salida.split("llegó primero").length - 1);
+        assertTrue(t.isDestinoAlcanzado(), "Debe haberse alcanzado un destino");
+        assertNotNull(t.getEraGanadora(), "Debe existir una era ganadora");
+
+        long ocurrencias = salida.split("llegó primero", -1).length - 1;
+        assertEquals(1, ocurrencias, "Solo una era debe haber llegado primero");
     }
 }

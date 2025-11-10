@@ -1,59 +1,72 @@
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Random;
 
 public class MilleniumFalcon {
 
-    public AtomicBoolean fin = new AtomicBoolean(false);
-    public AtomicBoolean destruida = new AtomicBoolean(false);
-    public int tiempoMisionMS = 4000;
-    public long inicio;
+    private volatile boolean fin = false;
+    private volatile boolean destruida = false;
 
-    public AtomicInteger velocidad = new AtomicInteger(0);
-    public AtomicInteger escudos = new AtomicInteger(100);
+    private final int tiempoMisionMS = 4000;
+    private long inicio;
 
-    private final Runnable hanSolo = () -> {
-        while (!fin.get()) {
-            velocidad.addAndGet(ThreadLocalRandom.current().nextInt(5, 16));
+    private volatile int velocidad = 0;
+    private volatile int escudos = 100;
 
-            if (ThreadLocalRandom.current().nextInt(1, 101) <= 5) {
-                destruida.set(true); fin.set(true);
+    private final Random random = new Random();
+
+    private final Runnable HanSolo = () -> {
+        while (!fin) {
+            velocidad += random.nextInt(11) + 5; // [5,15]
+            if (random.nextInt(100) < 5) { // 5% de probabilidad
+                destruida = true;
+                fin = true;
                 System.out.println("Fallo de hiperimpulsor. ¡La nave se destruye!");
             }
-
-            try { Thread.sleep(150); }
-            catch (InterruptedException e) { Thread.currentThread().interrupt(); }
-
-            if (System.currentTimeMillis() - inicio >= tiempoMisionMS) fin.set(true);
+            dormir(150);
+            if (System.currentTimeMillis() - inicio >= tiempoMisionMS) {
+                fin = true;
+            }
         }
     };
 
-    private final Runnable chewbacca = () -> {
-        while (!fin.get()) {
-            escudos.addAndGet(ThreadLocalRandom.current().nextInt(-10, 6));
-
-            if (escudos.get() <= 0) {
-                destruida.set(true); fin.set(true);
-                System.out.println("¡Escudos agotados! La nave se destruye!");
+    private final Runnable Chewbacca = () -> {
+        while (!fin) {
+            escudos += random.nextInt(16) - 10; // [-10, +5]
+            if (escudos <= 0) {
+                destruida = true;
+                fin = true;
+                System.out.println("¡Escudos agotados! ¡La nave se destruye!");
             }
-
-            try { Thread.sleep(150); }
-            catch (InterruptedException e) { Thread.currentThread().interrupt(); }
-
-            if (System.currentTimeMillis() - inicio >= tiempoMisionMS) fin.set(true);
+            dormir(150);
+            if (System.currentTimeMillis() - inicio >= tiempoMisionMS) {
+                fin = true;
+            }
         }
     };
 
     public void main() {
         inicio = System.currentTimeMillis();
-        Thread t1 = new Thread(hanSolo);
-        Thread t2 = new Thread(chewbacca);
-        t1.start(); t2.start();
-        try { t1.join(); t2.join(); }
-        catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+        Thread t1 = new Thread(HanSolo);
+        Thread t2 = new Thread(Chewbacca);
+        t1.start();
+        t2.start();
 
-        if (!destruida.get()) {
-            System.out.println("¡Han y Chewie escapan! Vel=" + velocidad.get() + ", Escudos=" + escudos.get());
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        if (!destruida) {
+            System.out.println("¡Han y Chewie escapan! Vel=" + velocidad + ", Escudos=" + escudos);
+        }
+    }
+
+    private void dormir(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }
