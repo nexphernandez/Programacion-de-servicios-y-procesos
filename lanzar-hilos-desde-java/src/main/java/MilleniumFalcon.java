@@ -1,5 +1,8 @@
 import java.util.Random;
-
+/**
+ * @author nexphernandez
+ * @version 1.0.0
+ */
 public class MilleniumFalcon {
 
     private volatile boolean fin = false;

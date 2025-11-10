@@ -2,7 +2,10 @@
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-
+/**
+ * @author nexphernandez
+ * @version 1.0.0
+ */
 public class FuerzaThorHulk {
 
     private final int durationMS = 5000;

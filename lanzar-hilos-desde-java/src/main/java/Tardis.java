@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
-
+/**
+ * @author nexphernandez
+ * @version 1.0.0
+ */
 public class Tardis {
 
     private final AtomicBoolean destinoAlcanzado = new AtomicBoolean(false);

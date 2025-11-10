@@ -3,7 +3,10 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
+/**
+ * @author nexphernandez
+ * @version 1.0.0
+ */
 public class Quidditch {
 
     private final AtomicBoolean snitchAtrapada = new AtomicBoolean(false);

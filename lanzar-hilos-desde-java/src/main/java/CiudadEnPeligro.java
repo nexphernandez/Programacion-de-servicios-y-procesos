@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
-
+/**
+ * @author nexphernandez
+ * @version 1.0.0
+ */
 public class CiudadEnPeligro {
 
     private final AtomicBoolean amenazaNeutralizada = new AtomicBoolean(false);

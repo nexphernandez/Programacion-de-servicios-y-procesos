@@ -1,5 +1,8 @@
 import java.util.Random;
-
+/**
+ * @author nexphernandez
+ * @version 1.0.0
+ */
 public class BatallaMagos {
 
     private int energiaGandalf = 120;

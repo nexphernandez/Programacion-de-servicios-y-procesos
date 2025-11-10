@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * @author danielrguezh
+ * @author nexphernandez
  * @version 1.0.0
  */
 public class CazaHorrocruxes {

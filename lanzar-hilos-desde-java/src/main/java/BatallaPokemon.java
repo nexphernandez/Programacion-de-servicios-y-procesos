@@ -3,7 +3,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
+/**
+ * @author nexphernandez
+ * @version 1.0.0
+ */
 public class BatallaPokemon {
     final AtomicBoolean juegoTerminado = new AtomicBoolean(false);
     public int hpPikachu = 100;
