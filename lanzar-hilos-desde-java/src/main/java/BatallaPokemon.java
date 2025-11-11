@@ -16,19 +16,19 @@ public class BatallaPokemon {
     public final Condition turnoCambio = lock.newCondition();
 
     private void atacar(String atacante, boolean esPikachu) {
-        int daño = ThreadLocalRandom.current().nextInt(5, 21);
+        int danio = ThreadLocalRandom.current().nextInt(5, 21);
         
         if (esPikachu) {
-            hpCharmander -= daño;
-            System.out.println(atacante + " ataca con " + daño + " de daño. HP rival: " + hpCharmander);
+            hpCharmander -= danio;
+            System.out.println(atacante + " ataca con " + danio + " de danio. HP rival: " + hpCharmander);
             
             if (hpCharmander <= 0 && !juegoTerminado.get()) {
                 juegoTerminado.set(true);
                 System.out.println(atacante + " ha ganado la batalla!");
             }
         } else {
-            hpPikachu -= daño;
-            System.out.println(atacante + " ataca con " + daño + " de daño. HP rival: " + hpPikachu);
+            hpPikachu -= danio;
+            System.out.println(atacante + " ataca con " + danio + " de danio. HP rival: " + hpPikachu);
             
             if (hpPikachu <= 0 && !juegoTerminado.get()) {
                 juegoTerminado.set(true);
@@ -106,6 +106,11 @@ public class BatallaPokemon {
 
     public int getHpCharmander() {
         return hpCharmander;
+    }
+
+    public static void main(String[] args) {
+        BatallaPokemon batallaPokemon = new BatallaPokemon();
+        batallaPokemon.main();
     }
 
 }
