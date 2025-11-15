@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author nexphernandez
  * @version 1.0.0
  */
-public class Estudiante extends Thread {
+public class EstudianteMejorado extends Thread {
 
     private final String nombre;
     private static final Semaphore semaforo = new Semaphore(4, true);
@@ -15,7 +15,7 @@ public class Estudiante extends Thread {
     /**
      * Contructor vacio
      */
-    public Estudiante() {
+    public EstudianteMejorado() {
         this.nombre = "";
     }
 
@@ -24,7 +24,7 @@ public class Estudiante extends Thread {
      *
      * @param nombre nombre del estudiante
      */
-    public Estudiante(String nombre) {
+    public EstudianteMejorado(String nombre) {
         this.nombre = nombre;
     }
 
@@ -33,9 +33,10 @@ public class Estudiante extends Thread {
         try {
             semaforo.acquire();
             try {
-                System.out.println("El " + nombre + " ha comenzado a utilizar el equipo ");
+                int numeroEquipo = semaforo.availablePermits() + 1;
+                System.out.println("El " + nombre + " ha comenzado a utilizar el equipo " + numeroEquipo);
                 Thread.sleep(ThreadLocalRandom.current().nextInt(3000, 5001));
-                System.out.println("El " + nombre + " ha finalizado con el equipo ");
+                System.out.println("El " + nombre + " ha finalizado con el equipo " + numeroEquipo);
             } finally {
                 semaforo.release();
             }

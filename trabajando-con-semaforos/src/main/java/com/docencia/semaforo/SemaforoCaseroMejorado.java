@@ -7,16 +7,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author nexphernandez
  * @version 1.0.0
  */
-public class SemaforoCasero implements Runnable {
+public class SemaforoCaseroMejorado implements Runnable {
 
     private final String color;
     private static final AtomicBoolean running = new AtomicBoolean(false);
-    private static final Semaphore semaphore = new Semaphore(1);
+    private static final Semaphore semaphore = new Semaphore(1, true);
+    private static String turno = "Rojo";
 
     /**
      * Constructor vacio
      */
-    public SemaforoCasero() {
+    public SemaforoCaseroMejorado() {
         this.color = "";
     }
 
@@ -25,12 +26,12 @@ public class SemaforoCasero implements Runnable {
      *
      * @param color color del semaforo
      */
-    public SemaforoCasero(String color) {
+    public SemaforoCaseroMejorado(String color) {
         this.color = color;
     }
 
         /**
-     * Metodo que gestiona el tiempo actualiza el turno
+     * Metodo que gestiona el tiempo segun el color y actualiza el turno
      * @return tiempo en milisegundos
      */
     private int gestionarColor() {
@@ -39,14 +40,17 @@ public class SemaforoCasero implements Runnable {
         switch (color) {
             case "Rojo":
                 tiempo = 3000;
+                turno = "Verde";
                 break;
 
             case "Verde":
                 tiempo = 3000;
+                turno = "Ambar";
                 break;
 
             case "Ambar":
                 tiempo = 1000;
+                turno = "Rojo";
                 break;
         }
 
@@ -58,6 +62,10 @@ public class SemaforoCasero implements Runnable {
         while (!running.get()) {
             try {
                 semaphore.acquire();
+
+                if (!turno.equals(color)) {
+                    continue;
+                }
 
                 System.out.println("Color actual: " + color);
 
