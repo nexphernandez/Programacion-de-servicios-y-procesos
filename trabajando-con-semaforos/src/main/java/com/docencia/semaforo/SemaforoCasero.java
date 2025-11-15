@@ -12,6 +12,7 @@ public class SemaforoCasero implements Runnable {
     private final String color;
     private static final AtomicBoolean running = new AtomicBoolean(false);
     private static final Semaphore semaphore = new Semaphore(1, true);
+    private static String turno = "Rojo";
 
     /**
      * Constructor vacio
@@ -29,39 +30,54 @@ public class SemaforoCasero implements Runnable {
         this.color = color;
     }
 
-    /**
-     * Funcion para verificar el tiempo del semaforo sabiendo el color
+        /**
+     * Metodo que gestiona el tiempo segun el color y actualiza el turno
      * @return tiempo en milisegundos
      */
-    public int tiempoSemaforo() {
+    private int gestionarColor() {
+        int tiempo = 0;
+
         switch (color) {
-            case "Rojo", "Verde": return 3000;
-            case "Ambar": return 1000;
-            default: return 0;
+            case "Rojo":
+                tiempo = 3000;
+                turno = "Verde";
+                break;
+
+            case "Verde":
+                tiempo = 3000;
+                turno = "Ambar";
+                break;
+
+            case "Ambar":
+                tiempo = 1000;
+                turno = "Rojo";
+                break;
         }
+
+        return tiempo;
     }
 
     @Override
     public void run() {
-            while (!running.get()) {
-                try {
-                    semaphore.acquire();
-                    try {
-                        if (running.get()) {
-                            break;
-                        }
-                        System.out.println("Color actual: " + color);
-                        Thread.sleep(tiempoSemaforo());
-                    } finally {
-                        semaphore.release(); 
-                    }
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
+        while (!running.get()) {
+            try {
+                semaphore.acquire();
+
+                if (!turno.equals(color)) {
+                    continue;
                 }
-                
+
+                System.out.println("Color actual: " + color);
+
+                int tiempo = gestionarColor();
+                Thread.sleep(tiempo);
+
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            } finally {
+                semaphore.release();
             }
-        
-        
+        }
     }
     
 
