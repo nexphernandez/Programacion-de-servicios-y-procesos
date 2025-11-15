@@ -2,7 +2,6 @@ package com.docencia.semaforo;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author nexphernandez
@@ -12,7 +11,6 @@ public class Estudiante extends Thread {
 
     private final String nombre;
     private static final Semaphore semaforo = new Semaphore(4, true);
-    private static final AtomicBoolean condicion = new AtomicBoolean(true);
 
     /**
      * Contructor vacio
