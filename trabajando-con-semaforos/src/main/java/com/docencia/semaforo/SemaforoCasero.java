@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class SemaforoCasero implements Runnable {
 
-    private String color;
+    private final String color;
     private static final AtomicBoolean running = new AtomicBoolean(false);
     private static final Semaphore semaphore = new Semaphore(1, true);
 
@@ -56,7 +56,7 @@ public class SemaforoCasero implements Runnable {
                         semaphore.release(); 
                     }
                 } catch (InterruptedException e) {
-                    return;
+                    Thread.currentThread().interrupt();
                 }
                 
             }
@@ -65,7 +65,7 @@ public class SemaforoCasero implements Runnable {
     }
     
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Thread rojo = new Thread(new SemaforoCasero("Rojo"));
         Thread verde = new Thread(new SemaforoCasero("Verde"));
         Thread ambar = new Thread(new SemaforoCasero("Ambar"));
@@ -75,14 +75,22 @@ public class SemaforoCasero implements Runnable {
         ambar.start();
         
 
-        Thread.sleep(20000);
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
 
         running.set(true);
 
 
-        rojo.join();
-        verde.join();
-        ambar.join();
+        try {
+            rojo.join();
+            verde.join();
+            ambar.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
 }
