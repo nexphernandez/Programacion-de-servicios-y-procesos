@@ -1,6 +1,8 @@
 package org.formacion.procesos.services.impl;
 
 
+import java.util.List;
+
 import org.formacion.procesos.domain.Job;
 import org.formacion.procesos.services.impl.abstractas.ComandoServiceAbstract;
 import org.springframework.stereotype.Component;
@@ -10,13 +12,15 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class LsofService extends ComandoServiceAbstract {
+    
+    private static final List<String> EXPRESION_REGULAR = List.of("-i");
 
     /**
      * Consturctor de la clase LsofService
      */
     public LsofService() {
-        this.setTipo(Job.LSOF);
-        this.setExpresionRegular("^(-i|\s*)$");
+        super(Job.LSOF, EXPRESION_REGULAR);
+        
     }
 
 }
