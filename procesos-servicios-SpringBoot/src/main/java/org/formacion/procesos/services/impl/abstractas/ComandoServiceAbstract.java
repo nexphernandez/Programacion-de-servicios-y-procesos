@@ -84,14 +84,7 @@ public abstract class ComandoServiceAbstract implements CommandService {
         String[] tokens = parametros.split("\\s+");
 
         for (String token : tokens) {
-
-            if (token.equals("|")) {
-                if (!expresionRegular.contains("|")) {
-                    return false;
-                }
-                continue;
-            }
-
+        
             if (expresionRegular.contains(token)) {
                 continue;
             }
@@ -102,6 +95,8 @@ public abstract class ComandoServiceAbstract implements CommandService {
                     continue;
                 }
             }
+
+
 
             return false;
         }
