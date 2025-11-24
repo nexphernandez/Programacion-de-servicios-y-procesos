@@ -370,9 +370,60 @@ public class SpawnsMundoAbierto {
 
 - `ScheduledExecutorService` permite:
   - `schedule(...)` → una vez en el futuro. ¿Qué significa esto?
+  ```
+  Que ejecuta la tarea solo una vez, después del timpo que le indiques. Por ejemplo:
+
+  scheduler.schedule(task, 5, TimeUnit.SECONDS);
+
+  lo ejecuta a los 5 segundos
+  ```
+
   - `scheduleAtFixedRate(...)` → repetidamente, cada X tiempo. ¿Qué significa esto?
+  ```
+  Que ejecuta la tarea cada intervalo fijo, por ejemplo:
+
+  scheduler.scheduleAtFixedRate(task, 0, 2, TimeUnit.SECONDS);
+
+  lo ejecuta en un intervalo entre 0 y dos segundos
+  ```
 - Cómo se comporta el sistema si la tarea tarda más que el período. Modifca, muestra el resultado y comenta.
+
+  ```
+  El ScheduledExecutorService no iniciará una nueva ejecución si la anterior no ha terminado.
+
+  // Dentro de run()
+  System.out.println("[" + LocalTime.now() + "][" + hilo + "] Spawn de " + enemigo + " en " + zona); 
+  try {
+    System.out.println("[" + LocalTime.now() + "][" + hilo + "] La tarea durará 3 segundos...");
+    Thread.sleep(3000); // Tarea (3s) > Periodo (2s)
+  } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+
+  Salida:
+
+  [21:06:57.937895948][pool-1-thread-1] Spawn de Mecha-Dragón en Bosque Maldito
+  [21:06:57.966111279][pool-1-thread-1] La tarea durará 3 segundos...
+  [21:07:06.248430672][pool-1-thread-1] Tarea finalizada.
+  [21:07:06.249304382][pool-1-thread-1] Spawn de Slime Mutante en Ruinas Antiguas
+  [21:07:06.249423294][pool-1-thread-1] La tarea durará 3 segundos...
+  [21:07:03.475493025][pool-1-thread-1] Tarea finalizada.
+  [21:07:03.475899395][pool-1-thread-1] Spawn de Esqueleto Guerrero en Ruinas Antiguas
+  [21:07:03.475991896][pool-1-thread-1] La tarea durará 3 segundos...
+  [21:07:05.978227321][pool-1-thread-1] Tarea finalizada.
+  [21:07:05.978500941][pool-1-thread-1] Spawn de Esqueleto Guerrero en Ruinas Antiguas
+  [21:07:05.978614991][pool-1-thread-1] La tarea durará 3 segundos...
+...
+  ```
+
 - Probar a cambiar el período (1s, 3s…) y la duración del `sleep` del `main`.  Modifca, muestra el resultado y comenta.
+
+```
+- **Período 1s, `sleep` del `main` 4s**:
+    -   **Cambio**: `scheduleAtFixedRate(..., 0, 1, SECONDS)` y `Thread.sleep(4000)`.
+    -   **Resultado**: Se ejecutarán 4 tareas (en t=0, t=1, t=2, t=3) antes de que el `main` inicie el apagado a los 4 segundos.
+-   **Período 3s, `sleep` del `main` 8s**:
+    -   **Cambio**: `scheduleAtFixedRate(..., 0, 3, SECONDS)` y `Thread.sleep(8000)`.
+    -   **Resultado**: Se ejecutarán 3 tareas (en t=0, t=3, t=6) antes de que el `main` inicie el apagado a los 8 segundos. La tarea de t=9 no llegará a ejecutarse.
+```
 
 ---
 
@@ -389,7 +440,3 @@ public class SpawnsMundoAbierto {
 - **Reto 5:**  
   Escribe tus propias trazas de log con formato tipo:
   `[TIMESTAMP] [SISTEMA] mensaje`.
-
-## Licencia 📄
-
-Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md]([../../../LICENSE.md](https://github.com/jpexposito/code-learn-practice/blob/main/LICENSE)) para detalles.
