@@ -1,0 +1,7 @@
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/TareasApplication.java
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/model/Tarea.java
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/repository/ITareaRepository.java
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/repository/TareaRepository.java
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/rest/TareaRestController.java
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/service/ITareaService.java
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/service/TareaService.java
