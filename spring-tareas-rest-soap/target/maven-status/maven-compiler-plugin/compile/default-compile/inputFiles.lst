@@ -1,10 +1,16 @@
 /home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/TareasApplication.java
 /home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/config/CxfConfig.java
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/mapper/TareaMapper.java
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/model/Alumno.java
 /home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/model/Tarea.java
 /home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/repository/ITareaRepository.java
 /home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/repository/TareaRepository.java
 /home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/rest/TareaRestController.java
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/service/AlumnoService.java
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/service/IAlumnoSevice.java
 /home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/service/ITareaService.java
 /home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/service/TareaService.java
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/soap/AlumnoSoapService.java
+/home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/soap/IAlumnoSoapEndPoint.java
 /home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/soap/ITareaSoapEndpoint.java
 /home/dam/Descargas/Programacion-de-servicios-y-procesos/spring-tareas-rest-soap/src/main/java/com/docencia/tareas/soap/TareaSoapService.java
